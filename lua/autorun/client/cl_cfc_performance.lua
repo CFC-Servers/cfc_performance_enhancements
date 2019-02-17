@@ -1,3 +1,5 @@
+AddCSLuaFile()
+
 local function removeHooks()
     hook.Remove("GUIMousePressed", "SuperDOFMouseDown")
     hook.Remove("GUIMouseReleased", "SuperDOFMouseUp")
