@@ -35,6 +35,7 @@ local function runCommands()
     RunConsoleCommand("r_threaded_renderables", "1")
     RunConsoleCommand("r_queued_ropes", "1")
     RunConsoleCommand("studio_queue_mode", "1")
+    RunConsoleCommand("prop_active_gib_limit", "0")
 end
 
 local function disableWidgets()
