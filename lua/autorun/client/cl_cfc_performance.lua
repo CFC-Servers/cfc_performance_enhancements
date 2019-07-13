@@ -32,7 +32,7 @@ local function runCommands()
     RunConsoleCommand("r_decals", "25") -- Max Decals
     --RunConsoleCommand("r_queued_decals", "1")-- potentially unstable
     --RunConsoleCommand("r_queued_ropes", "1") -- potentially unstable
-    RunConsoleCommand("r_queued_post_processing", "1") // 
+    RunConsoleCommand("r_queued_post_processing", "1")
     RunConsoleCommand("r_threaded_client_shadow_manager", "1")
     RunConsoleCommand("r_threaded_particles", "1")
     RunConsoleCommand("r_threaded_renderables", "1")
