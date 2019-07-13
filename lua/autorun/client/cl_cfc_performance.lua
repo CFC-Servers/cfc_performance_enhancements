@@ -25,17 +25,21 @@ local function removeHooks()
 end
 
 local function runCommands()
-    RunConsoleCommand("cl_threaded_bone_setup", "1")
-    RunConsoleCommand("cl_threaded_client_leaf_system", "1")
-    RunConsoleCommand("gmod_mcore_test", "1") -- It was suggested to set this value to -2 for some reason
+    --RunConsoleCommand("cl_threaded_bone_setup", "1")
+    --RunConsoleCommand("cl_threaded_client_leaf_system", "1")
+    --RunConsoleCommand("gmod_mcore_test", "1") -- It was suggested to set this value to -2 for some reason
     RunConsoleCommand("mat_queue_mode", "-1")
     RunConsoleCommand("r_decals", "25") -- Max Decals
+    --RunConsoleCommand("r_queued_decals", "1")-- potentially unstable
+    --RunConsoleCommand("r_queued_ropes", "1") -- potentially unstable
+    RunConsoleCommand("r_queued_post_processing", "1") // 
     RunConsoleCommand("r_threaded_client_shadow_manager", "1")
     RunConsoleCommand("r_threaded_particles", "1")
     RunConsoleCommand("r_threaded_renderables", "1")
-    RunConsoleCommand("r_queued_ropes", "1")
+    --RunConsoleCommand("r_queued_ropes", "1")
     RunConsoleCommand("studio_queue_mode", "1")
     RunConsoleCommand("prop_active_gib_limit", "0")
+    --RunConsoleCommand("snd_mix_async", "1") --Multithreaded sound. Causes the first few milliseconds of sounds to be cut off on some systems.
 end
 
 local function disableWidgets()
