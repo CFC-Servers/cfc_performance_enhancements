@@ -25,63 +25,43 @@ local function removeHooks()
 end
 
 local function runCommands()
-    --RunConsoleCommand("cl_threaded_bone_setup", "1")
-    --RunConsoleCommand("cl_threaded_client_leaf_system", "1")
-    --RunConsoleCommand("gmod_mcore_test", "1") -- It was suggested to set this value to -2 for some reason
+    RunConsoleCommand("cl_threaded_bone_setup", "1")
+    RunConsoleCommand("cl_threaded_client_leaf_system", "1")
+    RunConsoleCommand("gmod_mcore_test", "1") -- It was suggested to set this value to -2 for some reason
     RunConsoleCommand("mat_queue_mode", "-1")
     RunConsoleCommand("r_decals", "25") -- Max Decals
-    --RunConsoleCommand("r_queued_decals", "1")-- potentially unstable
-    --RunConsoleCommand("r_queued_ropes", "1") -- potentially unstable
+    RunConsoleCommand("r_queued_decals", "1")-- potentially unstable
+    RunConsoleCommand("r_queued_ropes", "1") -- potentially unstable
     RunConsoleCommand("r_queued_post_processing", "1")
     RunConsoleCommand("r_threaded_client_shadow_manager", "1")
     RunConsoleCommand("r_threaded_particles", "1")
     RunConsoleCommand("r_threaded_renderables", "1")
-    --RunConsoleCommand("r_queued_ropes", "1")
+    RunConsoleCommand("r_queued_ropes", "1")
     RunConsoleCommand("studio_queue_mode", "1")
     RunConsoleCommand("prop_active_gib_limit", "0")
-    --RunConsoleCommand("snd_mix_async", "1") --Multithreaded sound. Causes the first few milliseconds of sounds to be cut off on some systems.
+    RunConsoleCommand("snd_mix_async", "1") --Multithreaded sound. Causes the first few milliseconds of sounds to be cut off on some systems.
 end
 
 local function disableWidgets()
 end
 
-local function enableEnhancements()
+local function enableEnhancements( ply )
     print( "[CFC Enhancements] Enabling CFC Performance Enhancements.." )
 
-    -- Safety timer. Lets the last couple of things load up before we run the enhancements.
-    timer.Simple(2, function()
-        removeHooks()
-        runCommands()
-        disableWidgets()
-        print( "[CFC Enhancements] CFC Performance Enhancements enabled! Enjoy enhanced performance!" )
-    end)
+    removeHooks()
+    runCommands()
+    disableWidgets()
+
+    print( "[CFC Enhancements] CFC Performance Enhancements enabled! Enjoy enhanced performance!" )
 end
 
-local function playerIsLoaded()
-    return IsValid(LocalPlayer())
+local function checkForEnableCommand( ply, message )
+    if ply ~= LocalPlayer() then return end
+    if message ~= "!perfon" then return end
+
+    ply:ChatPrint( "[CFC Enhancements] Warning! This command may cause unintended side effects, such as stuttering or crashing" )
+    ply:ChatPrint( "[CFC Enhancements] If you experience any issues, please simply rejoin the server" )
+    ply:ChatPrint( "[CFC Enhancements] Enabling in two seconds.." )
+
+    timer.Simple( 2, enableEnhancements )
 end
-
-local function handleWaiterTimeout()
-    print( "[CFC Enhancements] CFC Waiter timed out! Enhancements won't be loaded." )
-end
-
-local function registerJobWithWaiter()
-    local waiterLoaded = Waiter or nil
-
-    if waiterLoaded then
-        print( "[CFC Enhancements] Waiter is loaded. Registering job.." )
-        Waiter.waitFor( playerIsLoaded, enableEnhancements, handleWaiterTimeout )
-    else
-        print( "[CFC Enhancements] Warning: Waiter wasn't loaded in time. Is it running? Inserting job into global queue, but don't rely on this to work." )
-        WaiterQueue = WaiterQueue or {}
-
-        local job = {}
-        job["waitingFor"] = playerIsLoaded
-        job["onSuccess"] = enableEnhancements
-        job["onTimeout"] = handleWaiterTimeout
-
-        table.insert( WaiterQueue, job )
-    end
-end
-
-registerJobWithWaiter()
