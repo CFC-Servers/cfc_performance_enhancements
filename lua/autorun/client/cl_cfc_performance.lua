@@ -7,7 +7,7 @@ local function removeHooks()
     hook.Remove( "PostRender", "RenderFrameBlend" )
     hook.Remove( "PreRender", "PreRenderFrameBlend" )
     hook.Remove( "PostDrawEffects", "RenderWidgets" )
-    --hook.Remove( "PostDrawEffects", "RenderHalos" )
+    -- hook.Remove( "PostDrawEffects", "RenderHalos" )
     hook.Remove( "RenderScene", "RenderStereoscopy" )
     hook.Remove( "RenderScene", "RenderSuperDoF" )
     hook.Remove( "RenderScreenspaceEffects", "RenderBloom" )
@@ -38,7 +38,7 @@ local function runCommands()
     RunConsoleCommand( "r_threaded_renderables", "1" )
     RunConsoleCommand( "studio_queue_mode", "1" )
     RunConsoleCommand( "prop_active_gib_limit", "0" )
-    RunConsoleCommand( "snd_mix_async", "1" ) --Multithreaded sound. Causes the first few milliseconds of sounds to be cut off on some systems.
+    RunConsoleCommand( "snd_mix_async", "1" ) -- Multithreaded sound. Causes the first few milliseconds of sounds to be cut off on some systems.
 end
 
 local function disableWidgets()
