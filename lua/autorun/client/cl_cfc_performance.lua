@@ -30,7 +30,7 @@ local function runCommands()
     RunConsoleCommand( "gmod_mcore_test", "1" ) -- It was suggested to set this value to -2 for some reason
     RunConsoleCommand( "mat_queue_mode", "-2" )
     RunConsoleCommand( "r_decals", "25" ) -- Max Decals
-    RunConsoleCommand( "r_queued_decals", "1" )-- potentially unstable
+    RunConsoleCommand( "r_queued_decals", "1" ) -- potentially unstable
     RunConsoleCommand( "r_queued_ropes", "1" ) -- potentially unstable
     RunConsoleCommand( "r_queued_post_processing", "1" )
     RunConsoleCommand( "r_threaded_client_shadow_manager", "1" )
@@ -55,10 +55,10 @@ local function warnEnable( ply, message, source )
 
     log( "[CFC Enhancements] Warning! This command may cause unintended side effects, such as stuttering or crashing" )
     log( "[CFC Enhancements] If you experience any issues, please simply rejoin the server" )
-    log( "[CFC Enhancements] Enabling in two seconds .. " )
+    log( "[CFC Enhancements] Enabling in two seconds..." )
 
     timer.Simple( 2, function()
-        log( "[CFC Enhancements] Enabling CFC Performance Enhancements .. " )
+        log( "[CFC Enhancements] Enabling CFC Performance Enhancements..." )
         enableEnhancements()
         log( "[CFC Enhancements] CFC Performance Enhancements enabled! Enjoy enhanced performance!" )
     end )
