@@ -1,5 +1,3 @@
-AddCSLuaFile()
-
 local function removeHooks()
     hook.Remove( "GUIMousePressed", "SuperDOFMouseDown" )
     hook.Remove( "GUIMouseReleased", "SuperDOFMouseUp" )
@@ -27,8 +25,8 @@ end
 local function runCommands()
     RunConsoleCommand( "cl_threaded_bone_setup", "1" )
     RunConsoleCommand( "cl_threaded_client_leaf_system", "1" )
-    RunConsoleCommand( "gmod_mcore_test", "1" ) -- It was suggested to set this value to -2 for some reason
-    RunConsoleCommand( "mat_queue_mode", "-2" )
+    RunConsoleCommand( "gmod_mcore_test", "1" )
+    RunConsoleCommand( "mat_queue_mode", "2" )
     RunConsoleCommand( "r_decals", "25" ) -- Max Decals
     RunConsoleCommand( "r_queued_decals", "1" ) -- potentially unstable
     RunConsoleCommand( "r_queued_ropes", "1" ) -- potentially unstable
