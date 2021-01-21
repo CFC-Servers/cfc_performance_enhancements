@@ -49,7 +49,8 @@ local function enableEnhancements()
 end
 
 local function warnEnable( ply, source )
-    local log = source == "chat" and ply.ChatPrint or print
+    local chatPrint = function( ... ) ply:ChatPrint( ... ) end
+    local log = source == "chat" and chatPrint or print
 
     log( "[CFC Enhancements] Warning! This command may cause unintended side effects, such as stuttering or crashing" )
     log( "[CFC Enhancements] If you experience any issues, please simply rejoin the server" )
