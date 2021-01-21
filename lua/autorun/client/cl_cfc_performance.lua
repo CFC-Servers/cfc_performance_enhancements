@@ -48,7 +48,7 @@ local function enableEnhancements()
     disableWidgets()
 end
 
-local function warnEnable( ply, message, source )
+local function warnEnable( ply, source )
     local log = source == "chat" and ply.ChatPrint or print
 
     log( "[CFC Enhancements] Warning! This command may cause unintended side effects, such as stuttering or crashing" )
