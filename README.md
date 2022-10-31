@@ -1,9 +1,6 @@
 # [Prototype] CFC Performance Enhancements
 A collection of clientside and serverside otpimizations that aim to increase performance while removing little or no functionality
 
-## Dependencies
-CFC Waiter: https://github.com/CFC-Servers/cfc_waiter
-
 ## Installation
 Just pop it in yer addons folder!
 
