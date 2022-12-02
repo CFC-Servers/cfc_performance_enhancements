@@ -1,45 +1,68 @@
+local changes = {
+    -- Async / threaded stuff
+    async_mode = 0,
+    snd_mix_async = 1,
+    mat_queue_mode = 2,
+    gmod_mcore_test = 1,
+    spawnicon_queue = 1,
+    studio_queue_mode = 1,
+    snd_async_fullyasync = 1,
+
+    mod_load_mesh_async = 1,
+    mod_load_anims_async = 1,
+    mod_load_vcollide_async = 1,
+
+    cl_threaded_bone_setup = 1,
+    cl_threaded_client_leaf_system = 1,
+
+    r_queued_ropes = 1,
+    r_queued_decals = 1,
+    r_threaded_particles = 1,
+    r_threaded_renderables = 1,
+    r_queued_post_processing = 1,
+    r_threaded_client_shadow_manager = 1,
+
+    -- Preferences with high performance impact
+    r_decals = 25,
+    prop_active_gib_limit = 0,
+
+    -- Net settings
+    net_queued_packet_thread = 1,
+    net_splitpacket_maxrate = 2097152,
+    net_udp_recvbuf = 131072,
+    net_maxroutable = 1260,
+    net_maxfragments = 1792,
+    net_compresspackets = 1,
+    net_compresspackets_minsize = 25000,
+}
+
 local function removeHooks()
-    hook.Remove( "GUIMousePressed", "SuperDOFMouseDown" )
-    hook.Remove( "GUIMouseReleased", "SuperDOFMouseUp" )
-    hook.Remove( "PreventScreenClicks", "SuperDOFPreventClicks" )
+    hook.Remove( "Think", "DOFThink" )
+    hook.Remove( "RenderScene", "RenderSuperDoF" )
     hook.Remove( "PostRender", "RenderFrameBlend" )
     hook.Remove( "PreRender", "PreRenderFrameBlend" )
     hook.Remove( "PostDrawEffects", "RenderWidgets" )
-    -- hook.Remove( "PostDrawEffects", "RenderHalos" )
     hook.Remove( "RenderScene", "RenderStereoscopy" )
-    hook.Remove( "RenderScene", "RenderSuperDoF" )
+    -- hook.Remove( "PostDrawEffects", "RenderHalos" )
+    hook.Remove( "GUIMouseReleased", "SuperDOFMouseUp" )
+    hook.Remove( "GUIMousePressed", "SuperDOFMouseDown" )
+    hook.Remove( "NeedsDepthPass", "NeedsDepthPass_Bokeh" )
     hook.Remove( "RenderScreenspaceEffects", "RenderBloom" )
     hook.Remove( "RenderScreenspaceEffects", "RenderBokeh" )
-    hook.Remove( "RenderScreenspaceEffects", "RenderColorModify" )
-    hook.Remove( "RenderScreenspaceEffects", "RenderMaterialOverlay" )
-    hook.Remove( "RenderScreenspaceEffects", "RenderMotionBlur" )
-    hook.Remove( "RenderScreenspaceEffects", "RenderSharpen" )
-    hook.Remove( "RenderScreenspaceEffects", "RenderSobel" )
-    hook.Remove( "RenderScreenspaceEffects", "RenderSunbeams" )
-    hook.Remove( "RenderScreenspaceEffects", "RenderTexturize" )
     hook.Remove( "RenderScreenspaceEffects", "RenderToyTown" )
-    hook.Remove( "Think", "DOFThink" )
-    hook.Remove( "NeedsDepthPass", "NeedsDepthPass_Bokeh" )
+    hook.Remove( "RenderScreenspaceEffects", "RenderSunbeams" )
+    hook.Remove( "RenderScreenspaceEffects", "RenderMotionBlur" )
+    hook.Remove( "PreventScreenClicks", "SuperDOFPreventClicks" )
 end
 
 local function runCommands()
-    RunConsoleCommand( "cl_threaded_bone_setup", "1" )
-    RunConsoleCommand( "cl_threaded_client_leaf_system", "1" )
-    RunConsoleCommand( "gmod_mcore_test", "1" )
-    RunConsoleCommand( "mat_queue_mode", "2" )
-    RunConsoleCommand( "r_decals", "25" ) -- Max Decals
-    RunConsoleCommand( "r_queued_decals", "1" ) -- potentially unstable
-    RunConsoleCommand( "r_queued_ropes", "1" ) -- potentially unstable
-    RunConsoleCommand( "r_queued_post_processing", "1" )
-    RunConsoleCommand( "r_threaded_client_shadow_manager", "1" )
-    RunConsoleCommand( "r_threaded_particles", "1" )
-    RunConsoleCommand( "r_threaded_renderables", "1" )
-    RunConsoleCommand( "studio_queue_mode", "1" )
-    RunConsoleCommand( "prop_active_gib_limit", "0" )
-    RunConsoleCommand( "snd_mix_async", "1" ) -- Multithreaded sound. Causes the first few milliseconds of sounds to be cut off on some systems.
+    for cvar, value in pairs( changes ) do
+        RunConsoleCommand( cvar, value )
+    end
 end
 
 local function disableWidgets()
+    -- hook.Remove( "PlayerTick", "TickWidgets" )
 end
 
 local function enableEnhancements()
