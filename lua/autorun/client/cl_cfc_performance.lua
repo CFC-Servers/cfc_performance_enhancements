@@ -63,7 +63,7 @@ local function runCommands()
 end
 
 local function disableWidgets()
-    -- hook.Remove( "PlayerTick", "TickWidgets" )
+    hook.Remove( "PlayerTick", "TickWidgets" )
 end
 
 local function enableEnhancements()
