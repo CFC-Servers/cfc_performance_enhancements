@@ -15,6 +15,7 @@ local changes = {
     cl_threaded_bone_setup = 1,
     cl_threaded_client_leaf_system = 1,
 
+    r_fastzreject = 1,
     r_queued_ropes = 1,
     r_queued_decals = 1,
     r_threaded_particles = 1,
