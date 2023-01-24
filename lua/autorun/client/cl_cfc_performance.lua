@@ -23,6 +23,9 @@ local changes = {
     r_queued_post_processing = 1,
     r_threaded_client_shadow_manager = 1,
 
+    mat_reduceparticles = 1,
+    mat_powersavingsmode = 1,
+
     -- Preferences with high performance impact
     r_decals = 25,
     prop_active_gib_limit = 0,
