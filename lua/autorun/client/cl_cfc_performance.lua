@@ -23,6 +23,9 @@ local changes = {
     r_queued_post_processing = 1,
     r_threaded_client_shadow_manager = 1,
 
+    r_dynamic = 0,
+    r_dynamiclighting = 0,
+
     mat_reduceparticles = 1,
     mat_powersavingsmode = 1,
 
