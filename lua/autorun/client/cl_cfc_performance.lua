@@ -27,7 +27,6 @@ local changes = {
     r_dynamiclighting = 0,
 
     mat_reduceparticles = 1,
-    mat_powersavingsmode = 1,
 
     -- Preferences with high performance impact
     r_decals = 25,
